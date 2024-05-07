@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif !important;
   overflow: auto;
   transition: all 0.3s ease;
 }
@@ -10,5 +12,5 @@ input, input:focus, input:active, input:hover {
 
 .time{
   font-size: 11px !important;
-  color: #000000 !important;
+  color: #969696 !important;
 }

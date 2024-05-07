@@ -35,11 +35,10 @@ function App() {
   async function run() {
     //----------------------------If the input field is empty---------------------------//
     if (message === "") {
-      return toast("Seems like we're in silent mode! Flip the switch whenever you're ready, and ask away I'm here to light up the conversation! 😊");
+      return toast("Ask me anything, I'm ready to chat! 😊");
     }
     //----------------------------Get the current time and date---------------------------//
-    const currentTime =
-      new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     //-------------------------------------------------------------------------------------//
 
     //--------------------------Add the user message to the chat history-------------------//
@@ -56,8 +55,7 @@ function App() {
     //--------------------Send the message to the chatbot server-----------------------//
     axios.post("http://localhost:5000/get", { message }).then((res) => {
       //----------------------------Get the current time and date---------------------------//
-      const responseTime =
-        new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString();
+      const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       //-------------------------------------------------------------------------------------//
 
       //--------------------------Add the chatbot response to the chat history-------------------//
@@ -82,7 +80,7 @@ function App() {
                 alt="avatar 3"
                 style={{ width: "45px", height: "100%", marginRight: "10px" }}
               />
-              <p className="mb-0" style={{ fontSize:'25px' }}>Trip Advisor</p>
+              <p className="mb-0" style={{ fontSize:'25px', fontWeight:'bold', color:'black' }}>Trip Advisor</p>
             </MDBCardHeader>
             <div
               className="scrollbar-light-blue"
@@ -101,6 +99,7 @@ function App() {
                             style={{
                               backgroundColor: "#e3e3e3",
                               color: "#000000",
+                              
                             }}
                           >
                             {item.message}
@@ -125,7 +124,7 @@ function App() {
                           style={{ width: "45px", height: "100%" }}
                         />
                         <div>
-                          <p className="p-2 ms-3 mb-1 rounded-3 w-75 chat" style={{ backgroundColor: '#c5eeff', color:'#2c2c2c' }}>
+                          <p className="p-2 ms-3 mb-1 rounded-3 w-75 chat" style={{ backgroundColor: '#afdaff', color:'#2c2c2c' }}>
                             {/* //-------------------------------Type Animation-------------------------------// */}
                             <TypeAnimation
                               sequence={item.message}
