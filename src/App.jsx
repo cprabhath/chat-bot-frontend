@@ -19,7 +19,13 @@ import "./App.css";
 function App() {
   //------------------------Initialize State---------------------------//
   const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState([
+    {
+      role: "chatbot",
+      message: "Hello! I'm Trip Advisor, how can I help you today? 😊",
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    },
+  ]);
   const chatEndRef = useRef(null);
   //-------------------------------------------------------------------//
 
