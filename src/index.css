@@ -1,0 +1,14 @@
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow: auto;
+  transition: all 0.3s ease;
+}
+
+input, input:focus, input:active, input:hover {
+  outline: solid 1px #a3a3a3 !important;
+}
+
+.time{
+  font-size: 11px !important;
+  color: #000000 !important;
+}
