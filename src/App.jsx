@@ -120,8 +120,8 @@ function App() {
                           style={{ width: "45px", height: "100%" }}
                         />
                       </div>
+                        //-------------------------------End of Display User Chat-------------------------------//
                     ) : (
-                      //-------------------------------End of Display User Chat-------------------------------//
                       //-------------------------------Display Chatbot Chat-------------------------------//
                       <div className="d-flex flex-row justify-content-start">
                         <img
@@ -171,7 +171,6 @@ function App() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => (e.key === "Enter" ? run() : null)}
-                required={true}
                 autoComplete={"off"}
               ></input>
               {/* //---------------------------End of Input Field----------------------------// */}
