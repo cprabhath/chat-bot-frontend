@@ -22,7 +22,7 @@ function App() {
   const [chatHistory, setChatHistory] = useState([
     {
       role: "chatbot",
-      message: "Hi, I'm Trip Advisor. How can I help you today? 😊",
+      message: "Hi! I'm here to assist you with your travel plans. What can I do for you today? 😊",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     }
   ]);
