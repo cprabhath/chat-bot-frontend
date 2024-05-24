@@ -59,7 +59,7 @@ function App() {
     //----------------------------------------------------------------------------//
 
     //--------------------Send the message to the chatbot server-----------------------//
-    axios.post("http://localhost:5000/get", { message }).then((res) => {
+    await axios.post("http://localhost:5000/get", { message }).then((res) => {
       //----------------------------Get the current time and date---------------------------//
       const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       //-------------------------------------------------------------------------------------//
