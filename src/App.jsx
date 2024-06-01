@@ -14,11 +14,14 @@ import {
 import { TypeAnimation } from "react-type-animation";
 import { toast } from "react-toastify";
 import "./App.css";
+import Feedback from "./feedback";
 //---------------------------------------------------------------------//
 //------------------------------Main Function--------------------------//
 function App() {
   //------------------------Initialize State---------------------------//
   const [message, setMessage] = useState("");
+  const [showFeedback, setShowFeedback] = useState(false);
+  const userName = "User";
   const [chatHistory, setChatHistory] = useState([
     {
       role: "chatbot",
@@ -37,6 +40,20 @@ function App() {
   }, [chatHistory]);
   //-------------------------------------------------------------------//
 
+  //---------------------Show feedback modal after 30 seconds-------------------//
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if(message === "") {
+        setShowFeedback(true);
+      }
+    }, 30000); // 30000 ms = 30 seconds
+  
+    return () => clearTimeout(timer); // Clean up the timer if the component unmounts
+  }, [message]); // Empty dependency array means this runs once on mount
+
+  const toggleFeedback = () => setShowFeedback(!showFeedback);
+  //-------------------------------------------------------------------//
+  
   //----------------------Function to send message----------------------//
   async function run() {
     //----------------------------If the input field is empty---------------------------//
@@ -105,7 +122,7 @@ function App() {
                             style={{
                               backgroundColor: "#e3e3e3",
                               color: "#000000",
-                              
+                              maxWidth:'500px'
                             }}
                           >
                             {item.message}
@@ -130,7 +147,7 @@ function App() {
                           style={{ width: "45px", height: "100%" }}
                         />
                         <div>
-                          <p className="p-2 ms-3 mb-1 rounded-3 w-75 chat" style={{ backgroundColor: '#afdaff', color:'#2c2c2c' }}>
+                          <p className="p-2 ms-3 mb-1 rounded-3 w-75 chat" style={{ backgroundColor: '#afdaff', color:'#2c2c2c',  maxWidth:'500px' }}>
                             {/* //-------------------------------Type Animation-------------------------------// */}
                             <TypeAnimation
                               sequence={item.message}
@@ -178,6 +195,7 @@ function App() {
             </MDBCardFooter>
             {/* //-------------------------------End of Card footer----------------------------// */}
           </MDBCard>
+          <Feedback isOpen={showFeedback} toggle={toggleFeedback} userName={userName} conversation={chatHistory}/>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
