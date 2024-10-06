@@ -12,6 +12,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Feedback({ isOpen, toggle, userName, conversation }) {
+  
   const [feedback, setFeedback] = useState("");
   const isFeedbackNotEmpty = feedback.trim() !== "";
 
@@ -30,7 +31,7 @@ export default function Feedback({ isOpen, toggle, userName, conversation }) {
         toggle();
       })
       .catch((error) => {
-        toast.error("Failed to send feedback because " + error.message);
+        toast.error("I am sorry! I am unable to send your feedback at the moment. because of " + error.message);
       });
     setFeedback("");
   };

@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import "./App.css";
 import Feedback from "./feedback";
 //---------------------------------------------------------------------//
+
 //------------------------------Main Function--------------------------//
 function App() {
   //------------------------Initialize State---------------------------//
@@ -25,9 +26,13 @@ function App() {
   const [chatHistory, setChatHistory] = useState([
     {
       role: "chatbot",
-      message: "Hi! I'm here to assist you with your travel plans. What can I do for you today? 😊",
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    }
+      message:
+        "Hi! I'm here to assist you with your travel plans. What can I do for you today? 😊",
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    },
   ]);
   const chatEndRef = useRef(null);
   //-------------------------------------------------------------------//
@@ -43,25 +48,28 @@ function App() {
   //---------------------Show feedback modal after 30 seconds-------------------//
   useEffect(() => {
     const timer = setTimeout(() => {
-      if(message === "") {
+      if (message === "") {
         setShowFeedback(true);
       }
-    }, 30000); // 30000 ms = 30 seconds
-  
+    }, 30000); // 30 seconds
+
     return () => clearTimeout(timer); // Clean up the timer if the component unmounts
   }, [message]); // Empty dependency array means this runs once on mount
 
   const toggleFeedback = () => setShowFeedback(!showFeedback);
   //-------------------------------------------------------------------//
-  
+
   //----------------------Function to send message----------------------//
   async function run() {
     //----------------------------If the input field is empty---------------------------//
     if (message === "") {
-      return toast("Ask me anything, I'm ready to chat! 😊");
+      return toast("Wait...! You haven't typed anything yet. 😅");
     }
     //----------------------------Get the current time and date---------------------------//
-    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const currentTime = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     //-------------------------------------------------------------------------------------//
 
     //--------------------------Add the user message to the chat history-------------------//
@@ -78,7 +86,10 @@ function App() {
     //--------------------Send the message to the chatbot server-----------------------//
     await axios.post("http://localhost:5000/get", { message }).then((res) => {
       //----------------------------Get the current time and date---------------------------//
-      const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const responseTime = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       //-------------------------------------------------------------------------------------//
 
       //--------------------------Add the chatbot response to the chat history-------------------//
@@ -86,6 +97,7 @@ function App() {
         ...prevHistory,
         { role: "chatbot", message: res.data.response, time: responseTime },
       ]);
+      console.log(res);
       //-------------------------------------------------------------------------------------//
     });
   }
@@ -103,7 +115,12 @@ function App() {
                 alt="avatar 3"
                 style={{ width: "45px", height: "100%", marginRight: "10px" }}
               />
-              <p className="mb-0" style={{ fontSize:'25px', fontWeight:'bold', color:'black' }}>Trip Advisor</p>
+              <p
+                className="mb-0"
+                style={{ fontSize: "25px", fontWeight: "bold", color: "black" }}
+              >
+                Trip Advisor
+              </p>
             </MDBCardHeader>
             <div
               className="scrollbar-light-blue"
@@ -122,7 +139,7 @@ function App() {
                             style={{
                               backgroundColor: "#e3e3e3",
                               color: "#000000",
-                              maxWidth:'500px'
+                              maxWidth: "500px",
                             }}
                           >
                             {item.message}
@@ -132,13 +149,13 @@ function App() {
                           </p>
                         </div>
                         <img
-                          src="https://th.bing.com/th/id/OIP.lXFVPWtCGapy0jhBZmUHdAHaHa?rs=1&pid=ImgDetMain"
+                          src="https://cdn-icons-png.flaticon.com/512/3293/3293466.png"
                           alt="avatar 1"
                           style={{ width: "45px", height: "100%" }}
                         />
                       </div>
-                        //-------------------------------End of Display User Chat-------------------------------//
                     ) : (
+                      //-------------------------------End of Display User Chat-------------------------------//
                       //-------------------------------Display Chatbot Chat-------------------------------//
                       <div className="d-flex flex-row justify-content-start">
                         <img
@@ -147,7 +164,14 @@ function App() {
                           style={{ width: "45px", height: "100%" }}
                         />
                         <div>
-                          <p className="p-2 ms-3 mb-1 rounded-3 w-75 chat" style={{ backgroundColor: '#afdaff', color:'#2c2c2c',  maxWidth:'500px' }}>
+                          <p
+                            className="p-2 ms-3 mb-1 rounded-3 w-75 chat"
+                            style={{
+                              backgroundColor: "#afdaff",
+                              color: "#2c2c2c",
+                              maxWidth: "500px",
+                            }}
+                          >
                             {/* //-------------------------------Type Animation-------------------------------// */}
                             <TypeAnimation
                               sequence={item.message}
@@ -175,7 +199,7 @@ function App() {
             {/* //-------------------------------Card footer----------------------------// */}
             <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
               <img
-                src="https://th.bing.com/th/id/OIP.lXFVPWtCGapy0jhBZmUHdAHaHa?rs=1&pid=ImgDetMain"
+                src="https://cdn-icons-png.flaticon.com/512/3293/3293466.png"
                 alt="avatar 3"
                 style={{ width: "45px", height: "100%", marginRight: "10px" }}
               />
@@ -195,7 +219,12 @@ function App() {
             </MDBCardFooter>
             {/* //-------------------------------End of Card footer----------------------------// */}
           </MDBCard>
-          <Feedback isOpen={showFeedback} toggle={toggleFeedback} userName={userName} conversation={chatHistory}/>
+          <Feedback
+            isOpen={showFeedback}
+            toggle={toggleFeedback}
+            userName={userName}
+            conversation={chatHistory}
+          />
         </MDBCol>
       </MDBRow>
     </MDBContainer>
